@@ -1,7 +1,20 @@
-﻿@model IEnumerable<BookStore.Models.Book>
+﻿@using BookStore.Models
+@model IEnumerable<BookStore.Models.Book>
 
 @{
     ViewData["Title"] = "Index";
+
+    string HasImage(Book book)
+    {
+        if(book.ImageUrl != "")
+        {
+            return "fa-solid fa-check";
+        }
+        else
+        {
+            return "fa-solid fa-x";
+        }
+    }
 }
 
 <h1>Index</h1>
@@ -16,7 +29,7 @@
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Author)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Language)
@@ -31,10 +44,7 @@
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
+                Has Image
             </th>
             <th></th>
         </tr>
@@ -46,7 +56,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Author)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Language)
@@ -61,10 +71,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                <i class="@HasImage(item)"></i>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
