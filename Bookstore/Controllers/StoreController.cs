@@ -18,7 +18,7 @@ namespace Bookstore.Controllers
             return View(await _context.Books.ToListAsync());
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
