@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Bookstore.Data;
 using BookStore.Models;
+using FluentAssertions.Common;
 namespace Bookstore
 {
     public class Program
@@ -16,6 +17,15 @@ namespace Bookstore
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                //options.IdleTimeout = TimeSpan.FromSeconds(10);
+            });
 
             var app = builder.Build();
 
@@ -46,6 +56,7 @@ namespace Bookstore
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -53,9 +64,12 @@ namespace Bookstore
 
             app.UseAuthorization();
 
+            app.UseSession();
+
+
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Store}/{action=Index}/{id?}");
 
             app.Run();
         }
