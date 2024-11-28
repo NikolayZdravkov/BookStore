@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Bookstore.Data;
 using BookStore.Models;
 using FluentAssertions.Common;
+using Bookstore.Models;
 namespace Bookstore
 {
     public class Program
@@ -13,9 +14,11 @@ namespace Bookstore
             builder.Services.AddDbContext<BookstoreContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("BookstoreContext") ?? throw new InvalidOperationException("Connection string 'BookstoreContext' not found.")));
 
-            
+
 
             // Add services to the container.
+            builder.Services.AddScoped<Cart>(sp => Cart.GetCart(sp));
+
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDistributedMemoryCache();
