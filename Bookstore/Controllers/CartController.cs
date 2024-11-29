@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bookstore.Models;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Bookstore.Controllers
 {
@@ -13,7 +15,10 @@ namespace Bookstore.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var items = _cart.GetAllCartItems();
+            _cart.CartItems = items;
+
+            return View(_cart);
         }
     }
 }

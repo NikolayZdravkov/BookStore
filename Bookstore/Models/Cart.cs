@@ -28,7 +28,7 @@ namespace Bookstore.Models
             return new Cart(context) { Id = cartId };
         }
 
-        public List<CartItem> GetCartItems()
+        public List<CartItem> GetAllCartItems()
         {
             return CartItems ?? (CartItems = _context.CartItems.Where(ci => ci.CartId == Id)
                 .Include(ci => ci.Book)
