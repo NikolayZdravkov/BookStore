@@ -1,4 +1,5 @@
 ﻿using Bookstore.Data;
+using BookStore.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Models
@@ -26,6 +27,34 @@ namespace Bookstore.Models
             session.SetString("Id", cartId);
 
             return new Cart(context) { Id = cartId };
+        }
+
+        public CartItem GetCartItem(Book book)
+        {
+            return _context.CartItems.SingleOrDefault(ci =>
+                 ci.Book.Id == book.Id && ci.CartId == Id);
+        }
+
+        public void AddToCart(Book book, int quantity)
+        {
+            var cartItem = GetCartItem(book);
+
+            if (cartItem == null)
+            {
+                cartItem = new CartItem
+                {
+                    Book = book,
+                    Quantity = quantity,
+                    CartId = Id
+                };
+
+                _context.CartItems.Add(cartItem);
+            }
+            else
+            {
+                cartItem.Quantity += quantity;
+            }
+            _context.SaveChanges();
         }
 
         public List<CartItem> GetAllCartItems()
