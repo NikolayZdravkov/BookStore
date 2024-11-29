@@ -17,6 +17,7 @@ namespace Bookstore
 
 
             // Add services to the container.
+            builder.Services.AddSingleton<HttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddScoped<Cart>(sp => Cart.GetCart(sp));
 
             builder.Services.AddControllersWithViews();
