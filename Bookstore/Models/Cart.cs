@@ -35,5 +35,13 @@ namespace Bookstore.Models
                 .ToList());
         }
 
+        public int GetCartTotal()
+        {
+            return _context.CartItems
+                .Where(ci => ci.CartId == Id)
+                .Select(ci => ci.Book.Price * ci.Quantity)
+                .Sum();
+        }
+
     }
 }
