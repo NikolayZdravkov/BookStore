@@ -1,4 +1,5 @@
 ﻿using Bookstore.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Models
 {
@@ -25,6 +26,13 @@ namespace Bookstore.Models
             session.SetString("Id", cartId);
 
             return new Cart(context) { Id = cartId };
+        }
+
+        public List<CartItem> GetCartItems()
+        {
+            return CartItems ?? (CartItems = _context.CartItems.Where(ci => ci.CartId == Id)
+                .Include(ci => ci.Book)
+                .ToList());
         }
 
     }

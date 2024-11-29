@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BookStore.Models;
+using Bookstore.Models;
 
 namespace Bookstore.Data
 {
@@ -15,5 +16,6 @@ namespace Bookstore.Data
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
     }
 }
