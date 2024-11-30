@@ -95,6 +95,18 @@ namespace Bookstore.Models
             return remainingQuantity;
         }
 
+        public void RemoveFromCart(Book book)
+        {
+            var cartItem = GetCartItem(book);
+
+            if (cartItem != null)
+            {
+                _context.CartItems.Remove(cartItem);
+            }
+            _context.SaveChanges();
+        }
+
+
         public List<CartItem> GetAllCartItems()
         {
             return CartItems ?? (CartItems = _context.CartItems.Where(ci => ci.CartId == Id)
