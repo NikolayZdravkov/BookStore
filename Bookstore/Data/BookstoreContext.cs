@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BookStore.Models;
 using Bookstore.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Bookstore.Data
 {
-    public class BookstoreContext : DbContext
+    public class BookstoreContext : IdentityDbContext<DefaultUser>
     {
         public BookstoreContext (DbContextOptions<BookstoreContext> options)
             : base(options)

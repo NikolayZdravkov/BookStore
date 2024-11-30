@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Bookstore.Data;
 using BookStore.Models;
 using FluentAssertions.Common;
 using Bookstore.Models;
+using Microsoft.AspNetCore.Identity;
 namespace Bookstore
 {
     public class Program
@@ -13,6 +14,8 @@ namespace Bookstore
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<BookstoreContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("BookstoreContext") ?? throw new InvalidOperationException("Connection string 'BookstoreContext' not found.")));
+
+            builder.Services.AddDefaultIdentity<DefaultUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BookstoreContext>();
 
 
 
