@@ -42,6 +42,12 @@ namespace Bookstore.Controllers
             return View(order);
         }
 
+        public IActionResult CheckoutComplete(Order order)
+        {
+            return View(order);
+        }
+
+
         public void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
