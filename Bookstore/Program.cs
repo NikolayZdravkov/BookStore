@@ -20,11 +20,14 @@ namespace Bookstore
 
 
             // Add services to the container.
+
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             builder.Services.AddScoped<Cart>(sp => Cart.GetCart(sp));
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddRazorPages();
 
             builder.Services.AddDistributedMemoryCache();
 
@@ -70,14 +73,20 @@ namespace Bookstore
 
             app.UseRouting();
 
+            app.MapRazorPages();
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseSession();
 
 
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Store}/{action=Index}/{id?}");
+               
 
             app.Run();
         }
