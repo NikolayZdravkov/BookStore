@@ -57,6 +57,27 @@ namespace Bookstore.Models
             _context.SaveChanges();
         }
 
+        public int ReduceQuantity(Book book)
+        {
+            var cartItem = GetCartItem(book);
+            var remainingQuantity = 0;
+
+            if (cartItem != null)
+            {
+                if (cartItem.Quantity > 1)
+                {
+                    remainingQuantity = --cartItem.Quantity;
+                }
+                else
+                {
+                    _context.CartItems.Remove(cartItem);
+                }
+            }
+            _context.SaveChanges();
+
+            return remainingQuantity;
+        }
+
         public List<CartItem> GetAllCartItems()
         {
             return CartItems ?? (CartItems = _context.CartItems.Where(ci => ci.CartId == Id)
