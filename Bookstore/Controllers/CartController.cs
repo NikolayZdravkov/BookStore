@@ -73,6 +73,13 @@ namespace Bookstore.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult ClearCart()
+        {
+            _cart.ClearCart();
+
+            return RedirectToAction("Index");
+        }
+
         public Book GetBookById(int id)
         {
             return _context.Books.FirstOrDefault(b => b.Id == id);
