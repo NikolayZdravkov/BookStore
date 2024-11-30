@@ -49,6 +49,18 @@ namespace Bookstore.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult ReduceQuantity(int id)
+        {
+            var selectedBook = GetBookById(id);
+
+            if (selectedBook != null)
+            {
+                _cart.ReduceQuantity(selectedBook);
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public Book GetBookById(int id)
         {
             return _context.Books.FirstOrDefault(b => b.Id == id);
