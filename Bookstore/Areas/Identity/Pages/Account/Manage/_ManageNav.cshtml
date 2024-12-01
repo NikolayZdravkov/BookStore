@@ -1,4 +1,5 @@
-﻿@inject SignInManager<DefaultUser> SignInManager
+﻿@using BookStore.Models
+@inject SignInManager<DefaultUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

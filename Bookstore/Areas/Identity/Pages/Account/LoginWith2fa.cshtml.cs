@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Bookstore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using BookStore.Models;
 
 namespace Bookstore.Areas.Identity.Pages.Account
 {

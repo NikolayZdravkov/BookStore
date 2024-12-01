@@ -8,23 +8,23 @@ namespace BookStore.Models
     {
         [PersonalData]
         [Required]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [PersonalData]
         [Required]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [PersonalData]
         [Required]
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
 
         [PersonalData]
         [Required]
-        public string ZipCode { get; set; }
+        public string ZipCode { get; set; } = string.Empty;
 
         [PersonalData]
         [Required]
-        public string City { get; set; }
+        public string City { get; set; } = string.Empty;
 
         [PersonalData]
         [DataType(DataType.Date)]
