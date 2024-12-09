@@ -1,9 +1,11 @@
 ﻿using Bookstore.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Controllers
 {
+    [AllowAnonymous]
     public class StoreController : Controller
     {
 
@@ -13,11 +15,14 @@ namespace Bookstore.Controllers
         {
             _context = context;
         }
+
+        
         public async Task<IActionResult> Index()
         {
             return View(await _context.Books.ToListAsync());
         }
 
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
